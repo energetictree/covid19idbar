@@ -5,7 +5,7 @@ import webbrowser
 
 
 class CoronaBar(object):
-    base_api_url = "https://coronavirus-19-api.herokuapp.com/countries"
+    base_api_url = "https://eligiblestore.com/api/covid19idn"
     province_api_url = "https://eligiblestore.com/api/covid19id"
     default_country = "Indonesia"
     default_province = "Bali"
@@ -44,18 +44,6 @@ class CoronaBar(object):
         except Exception as e:
             print(str(e))
             return False
-    '''
-    def create_country_listing(self, country):
-        # print("Creating")
-        data = self.get_country_data(country.title)
-        for k, v in data.items():
-            self.app.menu.add(rumps.MenuItem(self.string_mapper(k, v)))
-        current_time = datetime.datetime.now().strftime("%H:%M")
-        self.app.menu.add(rumps.MenuItem(title=f"Updated at {current_time}"))
-        # print("Created")
-        self.timer = rumps.Timer(self.on_update, self.update_interval)
-        self.timer.start()
-    '''
 
     def create_province_listing(self, province):
         # print("Creating")
@@ -75,7 +63,7 @@ class CoronaBar(object):
             if k not in ["Select Province", "Quit", "About"]:
                 del self.app.menu[k]
 
-        data = self.get_country_data(self.default_country)
+        data = self.get_country_data()
         for k, v in data.items():
             self.app.menu.insert_before(
                 "Quit", rumps.MenuItem(self.string_mapper_country(k, v))
@@ -89,7 +77,7 @@ class CoronaBar(object):
 
         current_time = datetime.datetime.now().strftime("%H:%M")
         self.app.menu.insert_before(
-            "Quit", rumps.MenuItem(title=f"Updated at {current_time}")
+            "Quit", rumps.MenuItem(title=f"Refreshed at {current_time}")
         )
         # print(f"Updated,province is {self.province}")
 
@@ -101,21 +89,15 @@ class CoronaBar(object):
         self.app.run()
 
     # DATA
-    '''
-    def get_country_list(self):
-        response = requests.request("GET", self.base_api_url)
-        data = response.json()
-        country_list = [e["country"] for e in data]
-        return sorted(country_list)
-    '''
+
     def get_province_list(self):
         response = requests.request("GET", self.province_api_url)
         data = response.json()
         province_list = [e["Provinsi"] for e in data]
         return sorted(province_list)
 
-    def get_country_data(self, country):
-        response = requests.request("GET", f"{self.base_api_url}/{country}")
+    def get_country_data(self):
+        response = requests.request("GET", self.base_api_url)
         data = response.json()
         return data
 
@@ -127,42 +109,30 @@ class CoronaBar(object):
     # STRING MAPPER
  
     def string_mapper_country(self, key, value):
-        if key == "country":
+        if key == "Tanggal":
+            return f"{value}"
+
+        elif key == "Negara":
             return f"{value}".upper()
 
-        elif key == "cases":
+        elif key == "Jumlah_Kasus_Kumulatif":
             return f"• Positive: {value}"
 
-        elif key == "todayCases":
-            return f"• Positive Today: {value}"
+        elif key == "Jumlah_Kasus_Baru_per_Hari":
+            return f"• New Positive: {value}"
+        
+        elif key == "Jumlah_pasien_dalam_perawatan":
+            return f"• Active: {value}"
+        
+        elif key == "Jumlah_Pasien_Sembuh":
+            return f"• Recovered: {value}"
 
-        elif key == "deaths":
+        elif key == "Jumlah_Pasien_Meninggal":
             return f"• Death: {value}"
-
-        elif key == "todayDeaths":
-            return f"• Death Today: {value}"
 
         elif key == "recovered":
             return f"• Recovered: {value}"
         
-        elif key == "active":
-            return f"• Active: {value}"
-        
-        elif key == "critical":
-            return f"• Critical: {value}"
-
-        elif key == "casesPerOneMillion":
-            return f"• Positive Per Million: {value}"
-        
-        elif key == "deathsPerOneMillion":
-            return f"• Death Per Million: {value}"
-
-        elif key == "totalTests":
-            return f"• Total Tests: {value}"
-
-        elif key == "testsPerOneMillion":
-            return f"• Test Per Million: {value}"
-
     def string_mapper(self, key, value):
         if key == "Provinsi":
             return f"{value}".upper()

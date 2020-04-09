@@ -22,10 +22,10 @@ A simple app that sits on your menu bar, that allows you to get informed on the 
 
 ## Where does the data come from? 
 
-Country API from [this repo](https://github.com/javieraviles/covidAPI) 
-Information comes originally from [worldometer](https://www.worldometers.info/coronavirus/). 
+Country API from [my repo](https://github.com/energetictree/covid19idn/) 
+Information comes originally from [BNPB](https://bnpb-inacovid19.hub.arcgis.com/datasets/statistik-perkembangan-covid19-indonesia). 
 
-Province API from [this repo](https://github.com/javieraviles/covidAPI) 
+Province API from [my repo](https://github.com/javieraviles/covidAPI) 
 Information comes originally from [BNPB](https://bnpb-inacovid19.hub.arcgis.com/datasets/covid19-indonesia-per-provinsi/data).
 
 ## How?

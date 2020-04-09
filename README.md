@@ -25,7 +25,11 @@ A simple app that sits on your menu bar, that allows you to get informed on the 
 Country API from [my repo](https://github.com/energetictree/covid19idn/) 
 Information comes originally from [BNPB](https://bnpb-inacovid19.hub.arcgis.com/datasets/statistik-perkembangan-covid19-indonesia). 
 
+<<<<<<< HEAD
 Province API from [my repo](https://github.com/javieraviles/covidAPI) 
+=======
+Province API from [my repo](https://github.com/energetictree/covid19id) 
+>>>>>>> 768c86fc6612262972449c9c9dd615552c24d90b
 Information comes originally from [BNPB](https://bnpb-inacovid19.hub.arcgis.com/datasets/covid19-indonesia-per-provinsi/data).
 
 ## How?

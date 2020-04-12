@@ -43,4 +43,5 @@ Why not? 🤷
 
 ## How To Compile?
 
+rm -rf build dist
 python3 setup.py py2app --packages=pkg_resources
